@@ -1,0 +1,58 @@
+import React from 'react'
+import { Input, Menu } from 'semantic-ui-react'
+
+class LoginHeader extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      authenticated: false
+    };
+  }
+
+  componentDidMount() {
+    const loggedIn = localStorage.getItem("authenticated");
+
+    if(loggedIn){
+      this.setState({
+        authenticated: true
+      });
+    }
+ }
+
+ logOutClick = () => {
+  this.setState({authenticated: false});
+  localStorage.setItem("authenticated", false)
+};
+
+  render() {
+
+    return (
+
+      <Menu>
+
+        <Menu.Item><a style={{color: 'black'}} href="/"><h1>Dev @ Deakin</h1></a></Menu.Item>
+
+        <Input className="headerSearch" icon='search' placeholder='Search...' />
+             
+
+        <Menu.Menu position="right">
+
+        <Menu.Item 
+          name='findQuestion'
+        >
+          <a href='/find_question'>Find Question</a>
+        </Menu.Item>
+
+        <Menu.Item 
+          name='post'
+        >
+          <a href='/post'>Post</a>
+        </Menu.Item>
+
+        </Menu.Menu>
+      </Menu>
+
+    )
+  }
+} export default LoginHeader
