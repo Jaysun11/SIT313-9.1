@@ -1,5 +1,6 @@
 import React from 'react'
 import { Input, Menu } from 'semantic-ui-react'
+import { Link } from "react-router-dom";
 
 class Header extends React.Component {
 
@@ -13,7 +14,7 @@ class Header extends React.Component {
   componentDidMount() {
     const loggedIn = localStorage.getItem("authenticated");
 
-    if(loggedIn){
+    if(loggedIn === 'true'){
       this.setState({
         authenticated: true
       });
@@ -31,8 +32,9 @@ class Header extends React.Component {
 
       <Menu>
 
-        <Menu.Item><a style={{color: 'black'}} href="/"><h1>Dev @ Deakin</h1></a></Menu.Item>
+        <Link to="/"><Menu.Item><h1>Dev @ Deakin</h1></Menu.Item></Link>
 
+        
         <Input className="headerSearch" icon='search' placeholder='Search...' />
              
 
@@ -41,20 +43,21 @@ class Header extends React.Component {
         <Menu.Item 
           name='findQuestion'
         >
-          <a href='/find_question'>Find Question</a>
+          <Link to="/find_question">Find Question</Link>
         </Menu.Item>
 
         <Menu.Item 
           name='post'
         >
-          <a href='/post'>Post</a>
+          <Link to="/post">Post</Link>
+          
         </Menu.Item>
 
         <Menu.Item 
           name='login'
         >
-        {this.state.authenticated && <span onClick={this.logOutClick}>Log Out</span>}
-        {!this.state.authenticated && <a href='/login'>Log in</a>}
+        {this.state.authenticated === true && <span onClick={this.logOutClick}>Log Out</span>}
+        {this.state.authenticated === false && <Link to="/login">Login</Link>}
           
         </Menu.Item>
 
